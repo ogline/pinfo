@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Passport Data Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        .form-container {
+            max-width: 500px;
+        }
+        .form-row {
+            margin-bottom: 8px;
+        }
+        .form-field {
+            margin-bottom: 5px;
+        }
+        .inline-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        label {
+            display: inline-block;
+            width: 120px;
+        }
+        input[type="text"] {
+            padding: 3px;
+            border: none;
+            border-bottom: 1px solid #000;
+            min-width: 200px;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            background-color: #f0f0f0;
+        }
+        .small-input {
+            min-width: 100px !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h3>PASSPORT DATA PAGE</h3>
+        
+        <div class="form-row">
+            <div class="form-field">
+                <label for="surname">Surname:</label>
+                <input type="text" id="surname" name="surname">
+                <span style="margin-left: 40px;">Passport No:</span>
+                <input type="text" id="passportNo" name="passportNo" class="small-input">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-field">
+                <label for="givenNames">Given Name(s):</label>
+                <input type="text" id="givenNames" name="givenNames" style="width: 300px;">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="inline-group">
+                <div class="form-field">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="text" id="dob" name="dob" placeholder="DD/MM/YYYY" class="small-input">
+                </div>
+                <div class="form-field">
+                    <label for="sex">Sex:</label>
+                    <input type="text" id="sex" name="sex" placeholder="M/F" style="width: 50px;">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-field">
+                <label for="placeOfBirth">Place of Birth:</label>
+                <input type="text" id="placeOfBirth" name="placeOfBirth">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="inline-group">
+                <div class="form-field">
+                    <label for="placeOfIssue">Place of Issue:</label>
+                    <input type="text" id="placeOfIssue" name="placeOfIssue">
+                </div>
+                <div class="form-field">
+                    <label for="dateOfIssue">Date of Issue:</label>
+                    <input type="text" id="dateOfIssue" name="dateOfIssue" placeholder="DD/MM/YYYY" class="small-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-field">
+                <label for="dateOfExpiry">Date of Expiry:</label>
+                <input type="text" id="dateOfExpiry" name="dateOfExpiry" placeholder="DD/MM/YYYY" class="small-input">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
