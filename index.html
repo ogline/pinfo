@@ -152,12 +152,27 @@
                             margin-bottom: 15px;
                             height: 20px;
                         }
+                        .inline-data {
+                            display: flex;
+                            gap: 100px;
+                        }
+                        .passport-line {
+                            display: flex;
+                            gap: 100px;
+                            margin-bottom: 15px;
+                        }
                     </style>
                 </head>
                 <body>
-                    <div class="data-line">${surname || ''}</div>
+                    <div class="passport-line">
+                        <div>${surname || ''}</div>
+                        <div>${passportNo || ''}</div>
+                    </div>
                     <div class="data-line">${givenNames || ''}</div>
-                    <div class="data-line">${dob || ''}</div>
+                    <div class="inline-data">
+                        <div>${dob || ''}</div>
+                        <div>${sex || ''}</div>
+                    </div>
                     <div class="data-line">${placeOfBirth || ''}</div>
                     <div class="data-line">${placeOfIssue || ''}</div>
                     <div class="data-line">${dateOfIssue || ''}</div>
