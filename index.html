@@ -94,15 +94,16 @@
         </div>
 
         <div class="form-row">
-            <div class="inline-group">
-                <div class="form-field">
-                    <label for="placeOfIssue">Place of Issue:</label>
-                    <input type="text" id="placeOfIssue" name="placeOfIssue">
-                </div>
-                <div class="form-field">
-                    <label for="dateOfIssue">Date of Issue:</label>
-                    <input type="text" id="dateOfIssue" name="dateOfIssue" placeholder="DD/MM/YYYY" class="small-input">
-                </div>
+            <div class="form-field">
+                <label for="placeOfIssue">Place of Issue:</label>
+                <input type="text" id="placeOfIssue" name="placeOfIssue">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-field">
+                <label for="dateOfIssue">Date of Issue:</label>
+                <input type="text" id="dateOfIssue" name="dateOfIssue" placeholder="DD/MM/YYYY" class="small-input">
             </div>
         </div>
 
@@ -114,26 +115,80 @@
         </div>
 
         <div class="button-container">
-            <button onclick="printInputData()">Print Input Data Only</button>
+            <button onclick="printInputDataOnly()">Print Input Data Only</button>
             <button onclick="printFullForm()">Print Full Form</button>
         </div>
     </div>
 
     <script>
-        function printInputData() {
+        function printInputDataOnly() {
             // Create a new window for printing
             const printWindow = window.open('', '_blank');
             
-            // Get all input values
-            const surname = document.getElementById('surname').value || '________';
-            const passportNo = document.getElementById('passportNo').value || '________';
-            const givenNames = document.getElementById('givenNames').value || '________';
-            const dob = document.getElementById('dob').value || 'DD/MM/YYYY';
-            const sex = document.getElementById('sex').value || '_';
-            const placeOfBirth = document.getElementById('placeOfBirth').value || '________';
-            const placeOfIssue = document.getElementById('placeOfIssue').value || '________';
-            const dateOfIssue = document.getElementById('dateOfIssue').value || 'DD/MM/YYYY';
-            const dateOfExpiry = document.getElementById('dateOfExpiry').value || 'DD/MM/YYYY';
+            // Get all input values - only include if they have data
+            let content = '';
+            
+            const surname = document.getElementById('surname').value;
+            const passportNo = document.getElementById('passportNo').value;
+            
+            // First line: Surname and Passport No (only if they have data)
+            if (surname || passportNo) {
+                content += `<div style="margin-bottom: 10px;">`;
+                if (surname) {
+                    content += `<strong>Surname:</strong> ${surname}`;
+                    if (passportNo) {
+                        content += ` &nbsp;&nbsp;&nbsp;&nbsp; <strong>Passport No:</strong> ${passportNo}`;
+                    }
+                } else if (passportNo) {
+                    content += `<strong>Passport No:</strong> ${passportNo}`;
+                }
+                content += `</div>`;
+            }
+            
+            const givenNames = document.getElementById('givenNames').value;
+            if (givenNames) {
+                content += `<div style="margin-bottom: 10px;"><strong>Given Name(s):</strong> ${givenNames}</div>`;
+            }
+            
+            const dob = document.getElementById('dob').value;
+            const sex = document.getElementById('sex').value;
+            if (dob || sex) {
+                content += `<div style="margin-bottom: 10px;">`;
+                if (dob) {
+                    content += `<strong>Date of Birth:</strong> ${dob}`;
+                    if (sex) {
+                        content += ` &nbsp;&nbsp;&nbsp;&nbsp; <strong>Sex:</strong> ${sex}`;
+                    }
+                } else if (sex) {
+                    content += `<strong>Sex:</strong> ${sex}`;
+                }
+                content += `</div>`;
+            }
+            
+            const placeOfBirth = document.getElementById('placeOfBirth').value;
+            if (placeOfBirth) {
+                content += `<div style="margin-bottom: 10px;"><strong>Place of Birth:</strong> ${placeOfBirth}</div>`;
+            }
+            
+            const placeOfIssue = document.getElementById('placeOfIssue').value;
+            if (placeOfIssue) {
+                content += `<div style="margin-bottom: 10px;"><strong>Place of Issue:</strong> ${placeOfIssue}</div>`;
+            }
+            
+            const dateOfIssue = document.getElementById('dateOfIssue').value;
+            if (dateOfIssue) {
+                content += `<div style="margin-bottom: 10px;"><strong>Date of Issue:</strong> ${dateOfIssue}</div>`;
+            }
+            
+            const dateOfExpiry = document.getElementById('dateOfExpiry').value;
+            if (dateOfExpiry) {
+                content += `<div style="margin-bottom: 10px;"><strong>Date of Expiry:</strong> ${dateOfExpiry}</div>`;
+            }
+            
+            // If no data is entered, show a message
+            if (!content) {
+                content = '<div>No data entered</div>';
+            }
             
             // Create the print content with only the input data
             printWindow.document.write(`
@@ -147,46 +202,10 @@
                             margin: 20px;
                             line-height: 1.8;
                         }
-                        .data-row {
-                            margin-bottom: 10px;
-                        }
-                        .inline-data {
-                            display: flex;
-                            gap: 40px;
-                        }
                     </style>
                 </head>
                 <body>
-                    <div class="data-row">
-                        <strong>Surname:</strong> ${surname} &nbsp;&nbsp;&nbsp;&nbsp; 
-                        <strong>Passport No:</strong> ${passportNo}
-                    </div>
-                    
-                    <div class="data-row">
-                        <strong>Given Name(s):</strong> ${givenNames}
-                    </div>
-                    
-                    <div class="data-row">
-                        <div class="inline-data">
-                            <div><strong>Date of Birth:</strong> ${dob}</div>
-                            <div><strong>Sex:</strong> ${sex}</div>
-                        </div>
-                    </div>
-                    
-                    <div class="data-row">
-                        <strong>Place of Birth:</strong> ${placeOfBirth}
-                    </div>
-                    
-                    <div class="data-row">
-                        <div class="inline-data">
-                            <div><strong>Place of Issue:</strong> ${placeOfIssue}</div>
-                            <div><strong>Date of Issue:</strong> ${dateOfIssue}</div>
-                        </div>
-                    </div>
-                    
-                    <div class="data-row">
-                        <strong>Date of Expiry:</strong> ${dateOfExpiry}
-                    </div>
+                    ${content}
                 </body>
                 </html>
             `);
