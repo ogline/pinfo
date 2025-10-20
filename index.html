@@ -39,12 +39,24 @@
         .small-input {
             min-width: 100px !important;
         }
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+        @media print {
+            button {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="form-container">
-        <h3>PASSPORT DATA PAGE</h3>
-        
         <div class="form-row">
             <div class="form-field">
                 <label for="surname">Surname:</label>
@@ -100,6 +112,94 @@
                 <input type="text" id="dateOfExpiry" name="dateOfExpiry" placeholder="DD/MM/YYYY" class="small-input">
             </div>
         </div>
+
+        <div class="button-container">
+            <button onclick="printInputData()">Print Input Data Only</button>
+            <button onclick="printFullForm()">Print Full Form</button>
+        </div>
     </div>
+
+    <script>
+        function printInputData() {
+            // Create a new window for printing
+            const printWindow = window.open('', '_blank');
+            
+            // Get all input values
+            const surname = document.getElementById('surname').value || '________';
+            const passportNo = document.getElementById('passportNo').value || '________';
+            const givenNames = document.getElementById('givenNames').value || '________';
+            const dob = document.getElementById('dob').value || 'DD/MM/YYYY';
+            const sex = document.getElementById('sex').value || '_';
+            const placeOfBirth = document.getElementById('placeOfBirth').value || '________';
+            const placeOfIssue = document.getElementById('placeOfIssue').value || '________';
+            const dateOfIssue = document.getElementById('dateOfIssue').value || 'DD/MM/YYYY';
+            const dateOfExpiry = document.getElementById('dateOfExpiry').value || 'DD/MM/YYYY';
+            
+            // Create the print content with only the input data
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Passport Data</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            margin: 20px;
+                            line-height: 1.8;
+                        }
+                        .data-row {
+                            margin-bottom: 10px;
+                        }
+                        .inline-data {
+                            display: flex;
+                            gap: 40px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="data-row">
+                        <strong>Surname:</strong> ${surname} &nbsp;&nbsp;&nbsp;&nbsp; 
+                        <strong>Passport No:</strong> ${passportNo}
+                    </div>
+                    
+                    <div class="data-row">
+                        <strong>Given Name(s):</strong> ${givenNames}
+                    </div>
+                    
+                    <div class="data-row">
+                        <div class="inline-data">
+                            <div><strong>Date of Birth:</strong> ${dob}</div>
+                            <div><strong>Sex:</strong> ${sex}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="data-row">
+                        <strong>Place of Birth:</strong> ${placeOfBirth}
+                    </div>
+                    
+                    <div class="data-row">
+                        <div class="inline-data">
+                            <div><strong>Place of Issue:</strong> ${placeOfIssue}</div>
+                            <div><strong>Date of Issue:</strong> ${dateOfIssue}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="data-row">
+                        <strong>Date of Expiry:</strong> ${dateOfExpiry}
+                    </div>
+                </body>
+                </html>
+            `);
+            
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+            printWindow.close();
+        }
+
+        function printFullForm() {
+            window.print();
+        }
+    </script>
 </body>
 </html>
